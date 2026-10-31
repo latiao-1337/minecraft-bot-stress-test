@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("com.gradleup.shadow") version "8.3.5"
 }
 
 group = "me.latiao"
@@ -20,11 +21,21 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
-tasks.jar {
+
+
+tasks.shadowJar {
+    archiveClassifier.set("")
+    mergeServiceFiles()
     manifest {
-        attributes["Main-Class"] = "me.latiao.proxy_test"
+        attributes["Main-Class"] = "me.latiao.Bot"
     }
 }
+
+
+tasks.assemble {
+    dependsOn(tasks.shadowJar)
+}
+
 tasks.test {
     useJUnitPlatform()
 }
