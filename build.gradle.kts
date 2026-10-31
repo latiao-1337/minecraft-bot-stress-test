@@ -20,7 +20,11 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
-
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "me.latiao.proxy_test"
+    }
+}
 tasks.test {
     useJUnitPlatform()
 }
